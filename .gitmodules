@@ -1,0 +1,3 @@
+[submodule "khe-ui-template/lib/khe-frontend-lib"]
+	path = khe-ui-template/lib/khe-frontend-lib
+	url = https://github.com/hacksu/khe-frontend-lib.git

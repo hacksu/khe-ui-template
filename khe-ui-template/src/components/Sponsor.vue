@@ -1,75 +1,6 @@
 <template>
 <div id="SponsorForm">
-  <h1>Interested in Sponsoring KHE?</h1>
-  <p>We want to make sure you feel like you're getting your money's worth when you sponsor our event. We have tons of options for letting you promote your brand, recruit smart, innovative people, and giving back to the tech community!</p>
-  <form action="http://10.14.213.11:3000/test/sponsors/cart" method="post">
-    <div id="form">
-      <span style="font-weight:bold;">
-        Company Name: 
-        <input type="text" placeholder="Company Name Here"
-             name="companyName"
-             v-model="companyName"
-             required>
-      </span>
-      <span style="font-weight:bold;">
-        Contact Email: 
-        <input type="email" placeholder="contact@company.com"
-             name="contactEmail"
-             v-model="companyEmail"
-             required>
-      </span>
-  
-    </div>
-    <p>Select the benefits that you'd be interested in below, or scroll over the <b>i</b> to learn more about them.</p>
-    
-    <br>
-    
-    <h3>Kent Hack Enough Sponsor Benefits</h3>
-  
-    <div class="benefit" v-for="benefit in benefits" v-if="benefit.tag == 'khe'">
-      <div class="name">
-        <div class="detailsBubble" v-if="benefit.details">
-          {{ benefit.description }}
-        </div>
-        <span class="details" 
-            @mouseenter="benefit.details = true;"
-            @mouseleave="benefit.details = false;">i</span>
-        {{ benefit.name}}
-      
-        </div>
-      <label class="container">${{ benefit.price }}
-        <input type="checkbox" v-model="benefit.checked"
-             v-bind:name="benefit.id">
-        <span class="checkmark"></span>
-      </label>
-    </div>
-    <br>
-    
-    <h3>Hacksu Sponsor Benefits</h3>
-    <p>Hacksu is Kent's CS organization.  We have weekly meetings with around 20-50 smart, committed, tech-oriented Kent students. We teach weekly lessons on various programming languages and libraries. </p>
-  
-    <div class="benefit" v-for="benefit in benefits" v-if="benefit.tag == 'hacksu'">
-      <div class="name">
-        <div class="detailsBubble" v-if="benefit.details">
-          {{ benefit.description }}
-        </div>
-        <span class="details" 
-            @mouseenter="benefit.details = true;"
-            @mouseleave="benefit.details = false;">i</span>
-        {{ benefit.name}}
-      
-        </div>
-      <label class="container">${{ benefit.price }}
-        <input type="checkbox" v-model="benefit.checked"
-             v-bind:name="benefit.id">
-        <span class="checkmark"></span>
-      </label>
-    </div>
-  
-    <input type="submit" id="submit" value="Submit!">
-  </form>
-  
-  <div id="total">Total: ${{ total }}</div>
+  hello world!
   
 </div>
 </template>
@@ -261,207 +192,25 @@
 </style>
 
 <script>
+import { ApiWrapper } from '../../lib/khe-frontend-lib/src/index.ts';
+// import { API_BASE } from '../../lib/khe-frontend-lib/src/config/config.ts';
 
 
 export default {
   name: 'Map',
   computed: {
-    total: function () {
-      var total = 0;
-      var i = 0;
-      for (i; i < this.benefits.length; i++) {
-        if (this.benefits[i].checked) {
-          total += this.benefits[i].price;
-        }
-      }
-      return total;
-    }
+    
   },
   data() {
     return {
-      companyName: '',
-      companyEmail: '',
-
-      benefits: [
-        {
-          name: 'Send Mentors',
-          id: 'send_mentors',
-          description: 'Description here!',
-          price: 100,
-          details: false,
-          checked: false,
-          tag: 'khe',
-          catagory: ''
-        },
-        {
-          name: 'Reserve Table',
-          id: 'reserve_table',
-          description: 'Description here!',
-          price: 100,
-          details: false,
-          checked: false,
-          tag: 'khe'
-        },
-        {
-          name: 'Judge Final Hacks',
-          id: 'judge_final_hacks',
-          description: 'Description here!',
-          price: 50,
-          details: false,
-          checked: false,
-          tag: 'khe'
-        },
-        {
-          name: 'Speak at Opening Ceremony (5 minutes)',
-          id: 'speak_at_opening_ceremony',
-          description: 'Description here!',
-          price: 100,
-          details: false,
-          checked: false,
-          tag: 'khe'
-        },
-        {
-          name: 'Keynote Speaker at Opening Ceremony (up to 15 minutes)',
-          id: 'keynote_speaker',
-          description: 'Description here!',
-          price: 100,
-          details: false,
-          checked: false,
-          tag: 'khe'
-        },
-        {
-          name: 'Reserved space in hacking area',
-          id: 'reserved_space',
-          description: 'Description here!',
-          price: 500,
-          details: false,
-          checked: false,
-          tag: 'khe'
-        },
-        {
-          name: 'Logo on website',
-          id: 'logo_on_website',
-          description: 'Description here!',
-          price: 100,
-          details: false,
-          checked: false,
-          catagory: 'marketing',
-          tag: 'khe'
-        },
-        {
-          name: 'Logo on T-shirt',
-          id: 'logo_on_t',
-          description: 'Description here!',
-          price: 100,
-          details: false,
-          checked: false,
-          catagory: 'marketing',
-          tag: 'khe'
-        },
-        {
-          name: 'Distrubuted Swag in Swag Bags',
-          id: 'swag_in_swag_bags',
-          description: 'Description here!',
-          price: 50,
-          details: false,
-          checked: false,
-          catagory: 'marketing',
-          tag: 'khe'
-        },
-        {
-          name: 'Send Recruiters',
-          id: 'send_recruiters',
-          description: 'Description here!',
-          price: 350,
-          details: false,
-          checked: false,
-          catagory: 'recruiting',
-          tag: 'khe'
-        },
-        {
-          name: 'Resume Book After Event',
-          id: 'resume_book_after',
-          description: 'Description here!',
-          price: 500,
-          details: false,
-          checked: false,
-          catagory: 'recruiting',
-          tag: 'khe'
-        },
-        {
-          name: 'Resume Book Before Event',
-          id: 'resume_book_before',
-          description: 'Description here!',
-          price: 700,
-          details: false,
-          checked: false,
-          catagory: 'recruiting',
-          tag: 'khe'
-        },
-
-        {
-          name: 'Talk at the Beginning of a Hacksu Lesson',
-          id: 'resume_book_before',
-          description: '10 minutes',
-          price: 50,
-          details: false,
-          checked: false,
-          catagory: 'general',
-          tag: 'hacksu'
-        },
-        {
-          name: 'Give a Hacksu Lesson',
-          id: 'hacksu_lesson',
-          description: 'Description Here!',
-          price: 100,
-          details: false,
-          checked: false,
-          catagory: 'general',
-          tag: 'hacksu'
-        },
-        {
-          name: 'Logo on Website for 1 Year',
-          id: 'hacksu_logo_on_website',
-          description: 'Description Here!',
-          price: 100,
-          details: false,
-          checked: false,
-          catagory: 'general',
-          tag: 'hacksu'
-        },
-        {
-          name: 'Name on Website As Contributor',
-          id: 'hacksu_name_on_website',
-          description: 'Description Here!',
-          price: 50,
-          details: false,
-          checked: false,
-          catagory: 'general',
-          tag: 'hacksu'
-        },
-        {
-          name: 'Logo on Hacksu Shirts',
-          id: 'hacksu_logo_on_t',
-          description: 'Description Here!',
-          price: 50,
-          details: false,
-          checked: false,
-          catagory: 'general',
-          tag: 'hacksu'
-        },
-        {
-          name: 'Big Logo on Hacksu Shirts',
-          id: 'hacksu_big_logo_on_t',
-          description: 'Description Here!',
-          price: 100,
-          details: false,
-          checked: false,
-          catagory: 'general',
-          tag: 'hacksu'
-        },
-      ]
+      
     };
   },
+  
+  mounted: function() {
+    const wrap = new ApiWrapper();
+    wrap.sponsorSource.getSponsors();
+  }
 
 };
 </script>
