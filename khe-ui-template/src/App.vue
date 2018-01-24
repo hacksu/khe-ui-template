@@ -60,6 +60,7 @@
 
 <script>
 import scrollto from 'vue-scrollto';
+import { ApiWrapper } from 'khe-frontend-lib';
 
 import login from './components/Login';
 import register from './components/Register';
@@ -71,6 +72,12 @@ export default {
     register,
   },
   data() {
+    const wrapper = new ApiWrapper({
+      api_base: 'https://api.khe.io/v1.0',
+      client_id: 'test_frontend_lib'
+    });
+    wrapper.sponsorSource.getSponsors().then(data => console.log(data));
+
     return {
       showLogin: false,
       showRegister: false,
