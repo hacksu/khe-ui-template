@@ -7,25 +7,33 @@
     <div class="formField">
       <span>Subject:</span>
       <input type="text" placeholder="Ex: Team Formation" name="subject"
-             class="contactTextField">
+             class="contactTextField"
+             v-model="subject">
     </div>
     <div class="formField">
       <span>Name:</span>
       <input type="text" placeholder="Ex: John Doe" name="name"
-             class="contactTextField">
+             class="contactTextField"
+             v-model="name">
     </div>
     <div class="formField">
       <span>Email:</span>
       <input type="text" placeholder="Ex: jdoe@example.com" name="email"
-             class="contactTextField">
+             class="contactTextField"
+             v-model="email">
     </div>
     <div class="formField">
       <span>Body:</span>
       <textarea placeholder="Tell us what's up here!" name="body"
-             class="contactTextField">
+             class="contactTextField"
+             v-model="content">
       </textarea>
     </div>
-    <button id="contactButton" class="apply-link">Send!</button>
+    <button id="contactButton" 
+            class="apply-link"
+            @click="submitTicket()">
+      Send!
+    </button>
   </div>
 </template>
 
@@ -82,7 +90,27 @@ export default {
   name: 'Main',
   data() {
     return {
+      subject: '',
+      name: '',
+      email: '',
+      content: '',
     };
   },
+  methods: {
+    submitTicket() {
+      this.$parent.wrapper.ticketManager.submitTicket(this.subject,
+          this.content,
+          this.email,
+          this.name)
+        .then((data) => {
+          // TODO: Show ticket created success.
+          console.log(data);
+        })
+        .catch((err) => {
+          // TODO: Show ticket creation error.
+          throw err;
+        });
+    }
+  }
 };
 </script>
