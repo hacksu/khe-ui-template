@@ -8,7 +8,7 @@
            class="textInput"
            type="text" 
            placeholder="you@website.com"
-           v-model="$parent.user.email"
+           v-model="email"
            />
     <br>
       
@@ -16,17 +16,20 @@
            class="textInput" 
            type="password" 
            placeholder="Your password here!!"
+           v-model="password"
            />
     <br>
     <input id="login-password-confirm" 
            class="textInput" 
            type="password" 
            placeholder="Confirm your password here!"
+           v-model="passwordConfirm"
            />
     <br>
     <br>
       
-    <button id="register-button" class="buttonInput" >
+    <button id="register-button" class="buttonInput" 
+        @click="register()">
       Register!
     </button>
 
@@ -120,7 +123,28 @@ export default {
   name: 'Login',
   data() {
     return {
+      email: '',
+      password: '',
+      passwordConfirm: ''
     };
   },
+  methods: {
+    register() {
+      // Verify that both 
+      if (this.password === this.passwordConfirm) {
+        this.$parent.wrapper.userManager.createUser(this.email, this.password)
+          .then((data) => {
+            // TODO: Sign up success.
+            console.log(data);
+          })
+          .catch((err) => {
+            // TODO: Sign up Failed.
+            throw err;
+          });
+      } else {
+        // TODO: Passwords don't match.
+      }
+    }
+  }
 };
 </script>
