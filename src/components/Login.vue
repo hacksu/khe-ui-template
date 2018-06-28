@@ -8,7 +8,7 @@
            class="textInput"
            type="text" 
            placeholder="you@website.com"
-           v-model="$parent.user.email"
+           v-model="email"
            />
     <br>
       
@@ -16,11 +16,13 @@
            class="textInput" 
            type="password" 
            placeholder="Your password here!!"
+           v-model="password"
            />
     <br>
     <br>
       
-    <button id="login-button" class="buttonInput" >
+    <button id="login-button" class="buttonInput"
+            @click="signIn()" >
       Log in!
     </button>
 
@@ -114,7 +116,22 @@ export default {
   name: 'Login',
   data() {
     return {
+      email: '',
+      password: '',
     };
   },
+  methods: {
+    signIn() {
+      this.$parent.wrapper.userManager.login(this.email, this.password)
+        .then((data) => {
+          // TODO: Login Success.
+          console.log(data);
+        })
+        .catch((err) => { 
+          // TODO: Login failed.
+          throw err; 
+        });
+    }
+  }
 };
 </script>
